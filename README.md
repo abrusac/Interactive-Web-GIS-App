@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# 🗺️ React + OpenLayers Cadastral Map Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React-based web application that uses **OpenLayers** to display cadastral parcels and Corine Land Cover 2018 raster data on an interactive map. The app allows users to click on parcels to view their details and toggle WMS layers dynamically.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Technologies Used
 
-## React Compiler
+- **React** (with TypeScript)
+- **OpenLayers** for map rendering
+- **TailwindCSS** for UI styling
+- **REST API** and **WMS** services for spatial data
+- **MVT (Mapbox Vector Tiles)** for cadastral parcels
+- **WMS (Web Map Service)** for Corine Land Cover 2018
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌐 External Services
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🧭 Cadastral Parcels (Vector Tiles)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Vector Tiles URL:**  
+  `https://gis-dev.listlabs.net/tegola/maps/cadastral_parcels/{z}/{x}/{y}.pbf`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Parcel Details API (REST):**  
+  `https://gis-dev.listlabs.net/api/dkp/parcels/:id`  
+  *(returns parcel number and area by feature ID)*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🌍 Corine Land Cover 2018 (WMS)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **WMS GetCapabilities:**  
+  `https://image.discomap.eea.europa.eu/arcgis/services/Corine/CLC2018_WM/MapServer/WMSServer?service=WMS&request=GetCapabilities&version=1.3.0`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **WMS GetMap Base URL:**  
+  `https://image.discomap.eea.europa.eu/arcgis/services/Corine/CLC2018_WM/MapServer/WMSServer`
+
+- **Layer Used:**  
+  Layer name: `'CLC2018'` (style: `'default'`)  
+  CRS: `EPSG:3857`  
+  Format: `'image/png'`
+
+
+  ## ▶️ How to Run
+
+1. **Clone the repository:**
+2. npm install
+3. npm run dev
+4. Visit http://localhost:3000
+ in your browser
+
+Enjoy 😊
